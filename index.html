@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    
+    Geekzsp</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+
+<body>
+<main class="content">
+  <section class="jumbotron">
+  <div class="video">
+    
+      <div class="video-frame">
+        <img src="/images/ocean/overlay-hero.png" alt="Decorative image frame">
+      </div>
+    
+    <div class="video-media">
+      <video playsinline="" autoplay="" loop="" muted="" data-autoplay=""
+             poster="/images/ocean/ocean.png" x5-video-player-type="h5">
+        <source src="/images/ocean/ocean.mp4" type="video/mp4">
+        <source src="/images/ocean/ocean.ogv" type="video/ogg">
+        <source src="/images/ocean/ocean.webm" type="video/webm">
+        <p>Your user agent does not support the HTML5 Video element.</p>
+      </video>
+      <div class="video-overlay"></div>
+    </div>
+    <div class="video-inner text-center text-white">
+      <h1><a href="/">Geekzsp</a></h1>
+      <p></p>
+      <div><img src="/images/hexo-inverted.svg" class="brand" alt="Geekzsp"></div>
+    </div>
+    <div class="video-learn-more">
+      <a class="anchor" href="#landingpage"><i class="fe fe-mouse"></i></a>
+    </div>
+  </div>
+</section>
+
+<div id="landingpage">
+  <section class="outer">
+  <article class="articles">
+    
+    <h1 class="page-type-title"></h1>
+
+    
+      
+        
+
+<article id="post-接口与实现类动态切换的四种方式" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/11/11/%E6%8E%A5%E5%8F%A3%E4%B8%8E%E5%AE%9E%E7%8E%B0%E7%B1%BB%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2%E7%9A%84%E5%9B%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/">接口与实现类动态切换的四种方式</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/11/11/%E6%8E%A5%E5%8F%A3%E4%B8%8E%E5%AE%9E%E7%8E%B0%E7%B1%BB%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2%E7%9A%84%E5%9B%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/" class="article-date">
+  <time datetime="2019-11-11T08:31:49.000Z" itemprop="datePublished">2019-11-11</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="第一种方式-Spring-Map注入方式"><a href="#第一种方式-Spring-Map注入方式" class="headerlink" title="第一种方式 Spring Map注入方式"></a>第一种方式 Spring Map注入方式</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">QuotaService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 评估额度</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> quotaRequest</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">QuotaResponse <span class="title">evaluateQuota</span><span class="params">(QuotaRequest quotaRequest)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span>(<span class="string">"mockQuotaService"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MockQuotaServiceImpl</span> <span class="keyword">implements</span> <span class="title">QuotaService</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span>(<span class="string">"riskQuotaService"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RiskQuotaServiceImpl</span> <span class="keyword">implements</span> <span class="title">QuotaService</span></span></span><br></pre></td></tr></table></figure>
+<p>如何使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> <span class="meta">@Autowired</span></span><br><span class="line"> Map&lt;String, QuotaService&gt; quotaServiceMap;  </span><br><span class="line"></span><br><span class="line">QuotaResponse quota = quotaServiceMap.get(apolloConfigUtil.getQuotaServiceName()).evaluateQuota(quotaRequest);</span><br></pre></td></tr></table></figure>
+<h1 id="第二种方式-Spring-Bean-ApplicationContext"><a href="#第二种方式-Spring-Bean-ApplicationContext" class="headerlink" title="第二种方式 Spring Bean ApplicationContext"></a>第二种方式 Spring Bean ApplicationContext</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BaseProcesser</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取支付类型</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">PaymentChannelEnum <span class="title">getPayType</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PayChannelMappingFactory</span> <span class="keyword">implements</span> <span class="title">ApplicationContextAware</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//支付模版</span></span><br><span class="line">    <span class="keyword">private</span> Map&lt;PaymentChannelEnum, BasePayProcesser&gt; payProcesserMap;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//支付模版</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> BasePayProcesser <span class="title">getPayProcessor</span><span class="params">(PaymentChannelEnum payType)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> payProcesserMap.get(payType);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setApplicationContext</span><span class="params">(ApplicationContext applicationContext)</span> <span class="keyword">throws</span> BeansException </span>&#123;</span><br><span class="line">        Map payMap = applicationContext.getBeansOfType(BasePayProcesser.class);</span><br><span class="line">        payProcesserMap = <span class="keyword">new</span> HashMap&lt;PaymentChannelEnum,BasePayProcesser&gt;(payMap.size());</span><br><span class="line">        <span class="keyword">for</span>(Object object:payMap.values())&#123;</span><br><span class="line">            BasePayProcesser processor = (BasePayProcesser)object;</span><br><span class="line">            payProcesserMap.put(processor.getPayType(),processor);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="第三种方式-Java-Spi"><a href="#第三种方式-Java-Spi" class="headerlink" title="第三种方式 Java Spi"></a>第三种方式 Java Spi</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CallBackMappingFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ConcurrentHashMap&lt;String, MethodManager&gt; methodMappings = <span class="keyword">new</span> ConcurrentHashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> <span class="keyword">boolean</span> init = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">CallBackMappingFactory</span><span class="params">()</span></span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">initHandlerMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ServiceLoader&lt;AbstractCallBackReceiveService&gt; baseMethodManagers = ServiceLoader.load(AbstractCallBackReceiveService.class);</span><br><span class="line">        <span class="keyword">for</span>(AbstractCallBackReceiveService abstractCallBackReceiveService :baseMethodManagers)&#123;</span><br><span class="line">            Method[] methods = abstractCallBackReceiveService.getClass().getDeclaredMethods();</span><br><span class="line">            <span class="keyword">for</span> (Method method : methods) &#123;</span><br><span class="line">                MethodMapping methodMapping = method.getAnnotation(MethodMapping.class);</span><br><span class="line">                <span class="keyword">if</span> (methodMapping != <span class="keyword">null</span> &amp;&amp; methodMapping.value() != <span class="keyword">null</span>) &#123;</span><br><span class="line"></span><br><span class="line">                    String mapping = methodMapping.value();</span><br><span class="line">                    addMethodMapping(mapping, <span class="keyword">new</span> MethodManager(StringUtils.uncapitalize(abstractCallBackReceiveService.getClass().getSimpleName()),method));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addMethodMapping</span><span class="params">(String mapping, MethodManager methodManager)</span> </span>&#123;</span><br><span class="line">        methodMappings.put(mapping, methodManager);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MethodManager <span class="title">getMethodMapping</span><span class="params">(String url)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!init)&#123;</span><br><span class="line">            initHandlerMethod();</span><br><span class="line">            init = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> methodMappings.get(url);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>(需要添加配置文件)<br>META-INF/services/com.qianli.cashmama.pay.service.callback.receive.AbstractCallBackReceiveService</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">com.qianli.cashmama.pay.service.callback.receive.CallBackReceivePaymentService</span><br><span class="line">com.qianli.cashmama.pay.service.callback.receive.CallBackReceiveRepaymentService</span><br><span class="line">com.qianli.cashmama.pay.service.callback.receive.CallBackReceiveAuthService</span><br><span class="line">com.qianli.cashmama.pay.service.callback.receive.CallBackReceiveWithholdService</span><br></pre></td></tr></table></figure>
+<h1 id="第四种方式-PostConstruct-自己维护Map"><a href="#第四种方式-PostConstruct-自己维护Map" class="headerlink" title="第四种方式 @PostConstruct 自己维护Map"></a>第四种方式 @PostConstruct 自己维护Map</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Map&lt;AcceptTypeEnum, AbstractCallBackSendService&gt; handlers = <span class="keyword">new</span> HashMap&lt;AcceptTypeEnum, AbstractCallBackSendService&gt;();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CallBackSendPaymentService</span> <span class="keyword">extends</span> <span class="title">AbstractCallBackSendService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    POrderPrePaymentDao pOrderPrePaymentDao;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        CallBackSendService.handlers.put(AcceptTypeEnum.ACCEPT_TYPE_PAYMENT, <span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/11/%E6%8E%A5%E5%8F%A3%E4%B8%8E%E5%AE%9E%E7%8E%B0%E7%B1%BB%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2%E7%9A%84%E5%9B%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/" data-id="ck2u6cav80003m6oz4xxsci3w"
+         class="article-share-link">Share</a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
+<article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/11/11/hello-world/">Hello World</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/11/11/hello-world/" class="article-date">
+  <time datetime="2019-11-11T08:30:21.671Z" itemprop="datePublished">2019-11-11</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/11/hello-world/" data-id="ck2u6cauu0000m6ozh2ff4yb0"
+         class="article-share-link">Share</a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
+<article id="post-Git常用命令" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/10/25/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Git常用命令</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/10/25/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time datetime="2019-10-25T08:57:25.000Z" itemprop="datePublished">2019-10-25</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>记录一下 备忘<br>学习地址：<a href="http://www.liaoxuefeng.com/" target="_blank" rel="noopener">http://www.liaoxuefeng.com/</a><br><a href="http://stormzhang.com/github/2016/07/09/learn-from-github-from-zero6/" target="_blank" rel="noopener">http://stormzhang.com/github/2016/07/09/learn-from-github-from-zero6/</a></p>
+<h2 id="git-安装-配置"><a href="#git-安装-配置" class="headerlink" title="git 安装 配置"></a>git 安装 配置</h2><ol>
+<li>安装</li>
+<li>配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;Your Name&quot;</span><br><span class="line">$ git config --global user.email &quot;email@example.com&quot; </span><br><span class="line"></span><br><span class="line">//非必要配置 (可查看上面的学习地址)</span><br><span class="line">git config --global color.ui true//让Git显示颜色，会让命令输出看起来更醒目：</span><br><span class="line"></span><br><span class="line">忽略特殊文件</span><br><span class="line">配置别名 </span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">git init   //创建git版本库</span><br><span class="line"></span><br><span class="line">git add &lt;file&gt; //添加到暂存区</span><br><span class="line">git add * 添加所有（不包括.gitignore 配置的忽略内容）</span><br><span class="line"></span><br><span class="line">git rm  &lt;file&gt; //删除文件</span><br><span class="line"></span><br><span class="line">git commit -m &quot;描述&quot; //提交到版本库</span><br><span class="line"></span><br><span class="line">git status //状态查看</span><br><span class="line"></span><br><span class="line">git diff //查看修改内容</span><br><span class="line"></span><br><span class="line">git log //提交历史 </span><br><span class="line"></span><br><span class="line">git log --pretty=oneline </span><br><span class="line"></span><br><span class="line">git log --graph //查看分支合并图</span><br><span class="line"></span><br><span class="line">git reflog //命令历史</span><br><span class="line"></span><br><span class="line">git reset --hard HEAD^ //版本回退 上一版本 前多少版本  head~数字</span><br><span class="line"></span><br><span class="line">git reset --hard 3628164 //根据commitid进行版本回退</span><br><span class="line"></span><br><span class="line">git checkout -- &lt;file&gt; //丢弃工作区的修改（实是用版本库里的版本替换工作区的版本）</span><br><span class="line"></span><br><span class="line">git reset HEAD &lt;file&gt; //丢弃暂存区的修改</span><br><span class="line"></span><br><span class="line">git tag &lt;name&gt;//用于新建一个标签，默认为HEAD，也可以指定一个commit id；</span><br><span class="line"></span><br><span class="line">git tag -a &lt;tagname&gt; -m &quot;blablabla...&quot;//可以指定标签信息；</span><br><span class="line"></span><br><span class="line">git tag -s &lt;tagname&gt; -m &quot;blablabla...&quot;//可以用PGP签名标签；</span><br><span class="line"></span><br><span class="line">git tag//可以查看所有标签。</span><br><span class="line"></span><br><span class="line">git push origin &lt;tagname&gt;//可以推送一个本地标签；</span><br><span class="line"></span><br><span class="line">git push origin --tags//可以推送全部未推送过的本地标签；</span><br><span class="line"></span><br><span class="line">git tag -d &lt;tagname&gt;//可以删除一个本地标签；</span><br><span class="line"></span><br><span class="line">git push origin :refs/tags/&lt;tagname&gt;//可以删除一个远程标签。</span><br><span class="line">git show &lt;tagname&gt;//查看标签信息</span><br><span class="line">git checkout tag/commitid //版本回退</span><br></pre></td></tr></table></figure>
+<h2 id="git-结合远程库-的一些命令"><a href="#git-结合远程库-的一些命令" class="headerlink" title="git 结合远程库 的一些命令"></a>git 结合远程库 的一些命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;youremail@example.com&quot; //生成ssh key</span><br><span class="line"></span><br><span class="line">ssh -T git@github.com //测试是否能够连接</span><br><span class="line"></span><br><span class="line">git remote add origin git@github.com:michaelliao/learngit.git //建立本地和远程库关联 远程库的名字就是origin，这是Git默认的叫法</span><br><span class="line"></span><br><span class="line">git push  origin &lt;分支名称&gt; //推送到远程 第一次要 加 -u 建立分支关联</span><br><span class="line"></span><br><span class="line">git clone git@github.com:michaelliao/gitskills.git //克隆 默认是master</span><br><span class="line"></span><br><span class="line">git clone -b &lt;指定分支名称&gt; git@github.com:michaelliao/gitskills.git //克隆指定分支</span><br><span class="line"></span><br><span class="line">git pull //从远程抓取最新的提交</span><br><span class="line"></span><br><span class="line">git remote -v //查看远程库信息</span><br><span class="line">git remote remove origin 解除和远程库关联</span><br></pre></td></tr></table></figure>
+<h2 id="gitignore配置"><a href="#gitignore配置" class="headerlink" title=".gitignore配置"></a>.gitignore配置</h2><p>.gitginore 也要同步上传的远程库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/.idea/</span><br><span class="line">*.iml</span><br><span class="line">/target/</span><br></pre></td></tr></table></figure>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><blockquote>
+<p>如果你是一个人开发，可能只需要 master、develop 两个分支就 ok 了，平时开发在 develop 分支进行，开发完成之后，发布之前合并到 master 分支</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">git branch //查看分支</span><br><span class="line"></span><br><span class="line">git branch &lt;name&gt; //创建分支</span><br><span class="line"></span><br><span class="line">git checkout &lt;name&gt; //切换分支</span><br><span class="line">git checkout -b &lt;name&gt; //创建+切换分支</span><br><span class="line"></span><br><span class="line">git merge &lt;name&gt; //合并某分支到当前分支</span><br><span class="line"></span><br><span class="line">//加上--no-ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并</span><br><span class="line">git branch -d &lt;name&gt; //删除分支</span><br><span class="line"></span><br><span class="line">git branch -D &lt;name&gt; //丢弃一个没有被合并过的分支</span><br><span class="line"></span><br><span class="line">git stash</span><br><span class="line"></span><br><span class="line">git stash pop //回到工作现场</span><br><span class="line"></span><br><span class="line">git stash list</span><br><span class="line"></span><br><span class="line">git checkout -b branch-name origin/branch-name//在本地创建和远程分支对应的分支</span><br><span class="line"></span><br><span class="line">git branch --set-upstream branch-name origin/branch-name //建立本地分支和远程分支的关联</span><br></pre></td></tr></table></figure>
+
+<h2 id="checkout"><a href="#checkout" class="headerlink" title="checkout"></a>checkout</h2><h3 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;name&gt; //切换分支</span><br><span class="line">git checkout -b &lt;name&gt; //创建+切换分支</span><br><span class="line">git checkout -b branch-name origin/branch-name //在本地创建和远程分支对应的分支</span><br></pre></td></tr></table></figure>
+<p>切换tag，切换到某次commit</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout tag/commitid //版本回退</span><br></pre></td></tr></table></figure>
+<h3 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h3><figure class="highlight plain"><figcaption><span>checkout -- <file></span><a href="//丢弃工作区的修改（实是用版本库里的版本替换工作区的版本）">link</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>一. reset的hard，soft，mixed参数区别</p>
+<p>git reset :和git add命令作用相反，撤销add操作，把index区内容撤销到working directory</p>
+<p>git reset的–hard  –mixed  –soft参数区别：<br>hard：把working directory和index区的内容都重置为指定的commit 版本<br>soft：保留现在working directory和index区的内容，HEAD指向制定的commit 版本<br>mixed：保留working区的内容，将index区和HEAD内容都修恢复到指定的commit版本</p>
+<p>二. reset和revert区别<br>      reset是回朔到指定的commit版本（指定commit版本之后的操作都消失了）。revert是删除指定的commit操作的内容（指定的版本内容消失，之前和之后commit版本内的操作都保留），但是这个操作也会做了一个commit提交版本。</p>
+<p>三： 如果本地的版本回退使用reset的话,  push 到 远程库 需要加 -f 强制操作  （因为 远程的commit 高于 本地)<br>四： pull 时候和本地冲突<br>error: Your local changes to ‘c/environ.c’ would be overwritten by merge.  Aborting.<br> Please, commit your changes or stash them before you can merge.<br>这个意思是说更新下来的内容和本地修改的内容有冲突，先提交你的改变或者先将本地修改暂时存储起来。<br>处理的方式非常简单，主要是使用git stash命令进行处理，分成以下几个步骤进行处理。<br>1、先将本地修改存储起来<br>$ git stash<br>这样本地的所有修改就都被暂时存储起来 。是用git stash list可以看到保存的信息：<br>git stash暂存修改<br>其中stash@{0}就是刚才保存的标记。<br>2、pull内容<br>暂存了本地修改之后，就可以pull了。<br>3、还原暂存的内容<br>$git stash pop stash@{0}<br>系统提示如下类似的信息：<br>Auto-merging c/environ.c<br>CONFLICT (content): Merge conflict in c/environ.c<br>意思就是系统自动合并修改的内容，但是其中有冲突，需要解决其中的冲突。<br>4、解决文件中冲突的的部分<br>就可以正常的提交了。<br>五：强制pull</p>
+<blockquote>
+<p>git fetch –all<br>git reset –hard origin/master<br>git pull</p>
+</blockquote>
+<p>git fetch 只是下载远程的库的内容，不做任何的合并 git reset 把HEAD指向刚刚下载的最新的版本</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/10/25/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="ck2u6cav40001m6oz4p6neh9j"
+         class="article-share-link">Share</a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
+<article id="post-post-title-with-whitespace" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/10/25/post-title-with-whitespace/">post title with whitespace</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/10/25/post-title-with-whitespace/" class="article-date">
+  <time datetime="2019-10-25T07:40:41.000Z" itemprop="datePublished">2019-10-25</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>你好</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/10/25/post-title-with-whitespace/" data-id="ck2u6cav70002m6ozhan11gi7"
+         class="article-share-link">Share</a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+  </article>
+  
+
+  
+</section>
+</div>
+
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 Geekzsp</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+
+  <aside class="sidebar">
+    
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="Geekzsp"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
