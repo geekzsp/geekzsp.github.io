@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Geekzsp
+title: Moss
 subtitle:
 description:
 keywords:
-author: Geekzsp
+author: moss
 language: zh-CH
 timezone:
 
@@ -84,7 +84,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: ocean
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
