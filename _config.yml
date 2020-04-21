@@ -8,7 +8,7 @@ subtitle:
 description:
 keywords:
 author: moss
-language: zh-CH
+language: zh-CN
 timezone:
 
 # URL
@@ -90,4 +90,4 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:geekzsp/geekzsp.github.io.git	
+  repo: git@github.com:geekzsp/geekzsp.github.io.git
